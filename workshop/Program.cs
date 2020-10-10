@@ -1,27 +1,58 @@
 ﻿using System;
+using System.Globalization;
 
-namespace workshop
+namespace TicTacToeGame
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Welcome to TictacToe Game");
+            Console.WriteLine("Hello, Welcome to TicTacToeGame");
             TicTacToe t = new TicTacToe();
-            t.CreateBoard();
+            char[] board = t.CreateBoard();
+            char pLetter = t.ChooseLetter();
+            char cLetter = 'X';
+            if (pLetter.Equals('X'))
+            {
+                cLetter = 'O';
+            }
         }
     }
 
     class TicTacToe
     {
-        public void CreateBoard()
+        public char[] CreateBoard()
         {
             char[] board = new char[10];
             for (int i = 1; i < 10; i++)
             {
-                board[i] = Convert.ToChar(0);
+                board[i] = '0';
             }
+            return board;
         }
+
+        public char ChooseLetter()
+        {
+            Console.WriteLine("Choose a letter between X and O");
+            char pLetter = Convert.ToChar(Console.ReadLine());
+            bool val = true;
+            while (val)
+            {
+                if (!(pLetter.Equals('X') || pLetter.Equals('O')))
+                {
+                    Console.WriteLine("Please choose  the given letters");
+                    pLetter = ChooseLetter();
+                }
+                else
+                {
+                    val = false;
+                }
+            }
+            return pLetter;
+        }
+
     }
+
+
+
 }
